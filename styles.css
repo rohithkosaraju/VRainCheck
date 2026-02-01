@@ -1,13 +1,14 @@
 :root{
   --rose:#d88c96;
-  --rose-soft:#f3c7cc;
+  --rose-soft:#f6d1d6;
+  --rose-glow:rgba(216,140,150,.45);
   --bg1:#fff5f6;
   --bg2:#fffafc;
   --text:#262525;
   --muted:#6b6b6b;
-  --radius:18px;
+  --radius:22px;
   --ease:cubic-bezier(.22,.9,.32,1);
-  --shadow:0 20px 60px rgba(216,140,150,.18);
+  --shadow:0 25px 70px rgba(216,140,150,.25);
   --font:"Inter", system-ui, sans-serif;
 }
 
@@ -20,6 +21,8 @@ body{
   color:var(--text);
   overflow:hidden;
 }
+
+/* ---------- STAGE & BACKGROUND ---------- */
 
 .stage{
   position:relative;
@@ -34,8 +37,8 @@ body{
   position:absolute;
   inset:0;
   background:
-    radial-gradient(circle at 20% 10%, #ffe9ec, transparent 40%),
-    radial-gradient(circle at 80% 20%, #ffeef2, transparent 45%),
+    radial-gradient(circle at 15% 12%, #ffe6ea, transparent 45%),
+    radial-gradient(circle at 85% 18%, #fff0f4, transparent 50%),
     linear-gradient(180deg,var(--bg1),var(--bg2));
   z-index:0;
 }
@@ -51,20 +54,21 @@ body{
 .particle{
   position:absolute;
   font-size:18px;
-  opacity:.22;
+  opacity:.25;
   animation:float var(--dur,10s) linear infinite;
 }
 
 @keyframes float{
   from{transform:translateY(20vh) rotate(0deg);opacity:0}
-  to{transform:translateY(-110vh) rotate(360deg);opacity:.35}
+  to{transform:translateY(-120vh) rotate(360deg);opacity:.35}
 }
 
-/* CARD */
+/* ---------- MAIN CARD ---------- */
+
 .card{
   background:rgba(255,255,255,.85);
-  backdrop-filter:blur(12px);
-  padding:38px 34px;
+  backdrop-filter:blur(14px);
+  padding:38px 36px;
   border-radius:var(--radius);
   box-shadow:var(--shadow);
   text-align:center;
@@ -74,7 +78,7 @@ body{
 }
 
 @keyframes enter{
-  from{opacity:0;transform:translateY(12px)}
+  from{opacity:0;transform:translateY(14px)}
   to{opacity:1;transform:translateY(0)}
 }
 
@@ -110,7 +114,7 @@ body{
   background:linear-gradient(180deg,#e09aa3,#d88c96);
   color:#fff;
   font-weight:600;
-  box-shadow:0 10px 24px rgba(216,140,150,.35);
+  box-shadow:0 12px 28px rgba(216,140,150,.4);
 }
 
 .hint{
@@ -120,18 +124,19 @@ body{
   min-height:18px;
 }
 
-/* REVEAL */
+/* ---------- POLISHED NO DIALOG ---------- */
+
 .reveal{
   position:fixed;
   inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:rgba(255,245,247,.65);
-  backdrop-filter:blur(10px);
+  background:rgba(255,245,247,.7);
+  backdrop-filter:blur(12px);
   opacity:0;
   pointer-events:none;
-  transition:.4s var(--ease);
+  transition:.45s var(--ease);
   z-index:5;
 }
 
@@ -141,32 +146,71 @@ body{
 }
 
 .reveal-inner{
-  background:radial-gradient(circle at top, #fff0f2, #ffffff);
-  padding:34px 36px;
-  border-radius:22px;
+  position:relative;
+  background:
+    radial-gradient(circle at top, #fff1f4, #ffffff);
+  padding:42px 44px;
+  border-radius:28px;
   text-align:center;
-  box-shadow:0 30px 80px rgba(216,140,150,.25);
-  animation:pop .45s var(--ease);
+  box-shadow:
+    0 40px 90px rgba(216,140,150,.35),
+    inset 0 0 0 1px rgba(216,140,150,.15);
+  animation:dialogIn .5s var(--ease);
 }
 
-@keyframes pop{
-  from{transform:scale(.9);opacity:0}
-  to{transform:scale(1);opacity:1}
+@keyframes dialogIn{
+  from{transform:scale(.88) translateY(10px);opacity:0}
+  to{transform:scale(1) translateY(0);opacity:1}
 }
 
+/* soft glowing halo */
+.halo{
+  position:absolute;
+  inset:-40px;
+  background:radial-gradient(circle, var(--rose-glow), transparent 65%);
+  opacity:.35;
+  filter:blur(30px);
+  z-index:-1;
+}
+
+/* heart */
 .reveal-heart{
-  font-size:34px;
+  font-size:38px;
   color:var(--rose);
-  animation:heartbeat 1.4s infinite;
+  animation:heartbeat 1.5s infinite;
 }
 
 @keyframes heartbeat{
   0%,100%{transform:scale(1)}
-  50%{transform:scale(1.15)}
+  50%{transform:scale(1.18)}
 }
 
+.reveal-title{
+  margin:14px 0 6px;
+  font-size:30px;
+  font-weight:600;
+  letter-spacing:.3px;
+}
+
+.reveal-lead{
+  margin:10px 0;
+  font-size:16px;
+  color:var(--muted);
+  line-height:1.4;
+}
+
+.reveal-sub{
+  font-size:13px;
+  color:#8a6d72;
+  margin-top:6px;
+}
+
+/* close button */
 .btn-close{
-  margin-top:18px;
-  background:#fff;
-  border:1px solid #ddd;
+  margin-top:22px;
+  padding:10px 26px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#ffffff,#fff5f7);
+  border:1px solid rgba(216,140,150,.35);
+  box-shadow:0 6px 18px rgba(216,140,150,.25);
 }
