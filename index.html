@@ -1,38 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Will you be my Valentine?</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRainCheck</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="stage" id="stage" aria-live="polite">
-    <div class="decor" id="decor" aria-hidden="true"></div>
-
-    <section class="card" id="card">
-      <h1 class="question">Will you be my Valentine?</h1>
-
-      <div class="buttons" id="buttons">
-        <button class="btn btn-yes" id="btnYes" aria-label="Yes (unreachable)">Yes</button>
-        <button class="btn btn-no" id="btnNo">No</button>
-      </div>
-
-      <p class="hint" id="hint" aria-hidden="true"></p>
-    </section>
-
-    <div class="reveal hidden" id="reveal" role="dialog" aria-modal="true">
-      <div class="reveal-inner">
-        <h2>Yaaaaaay.</h2>
-        <p class="reveal-lead">Freedom.<br>Time to breathe.</p>
-        <p class="reveal-sub">That was honest.</p>
-        <button class="btn btn-close" id="closeReveal">Close</button>
-      </div>
-    </div>
-  </main>
-
-  <script src="/script.js" defer></script>
+    <h1>Welcome to VRainCheck</h1>
+    <script src="script.js"></script>
 </body>
 </html>
