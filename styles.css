@@ -51,13 +51,13 @@ body{
 .particle{
   position:absolute;
   font-size:18px;
-  opacity:.18;
-  animation:float var(--dur,14s) linear infinite;
+  opacity:.22;
+  animation:float var(--dur,10s) linear infinite;
 }
 
 @keyframes float{
-  from{transform:translateY(15vh) rotate(0deg);opacity:0}
-  to{transform:translateY(-35vh) rotate(360deg);opacity:.3}
+  from{transform:translateY(20vh) rotate(0deg);opacity:0}
+  to{transform:translateY(-110vh) rotate(360deg);opacity:.35}
 }
 
 /* CARD */
@@ -96,7 +96,7 @@ body{
   border-radius:14px;
   font-size:15px;
   cursor:pointer;
-  transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease), opacity .3s var(--ease);
 }
 
 .btn-yes{
@@ -120,7 +120,7 @@ body{
   min-height:18px;
 }
 
-/* REVEAL DIALOG */
+/* REVEAL */
 .reveal{
   position:fixed;
   inset:0;
@@ -141,8 +141,7 @@ body{
 }
 
 .reveal-inner{
-  background:
-    radial-gradient(circle at top, #fff0f2, #ffffff);
+  background:radial-gradient(circle at top, #fff0f2, #ffffff);
   padding:34px 36px;
   border-radius:22px;
   text-align:center;
@@ -158,28 +157,12 @@ body{
 .reveal-heart{
   font-size:34px;
   color:var(--rose);
-  animation:heartbeat 1.6s infinite;
+  animation:heartbeat 1.4s infinite;
 }
 
 @keyframes heartbeat{
   0%,100%{transform:scale(1)}
   50%{transform:scale(1.15)}
-}
-
-.reveal h2{
-  margin:12px 0 6px;
-  font-size:28px;
-}
-
-.reveal-lead{
-  margin:8px 0;
-  font-size:16px;
-  color:var(--muted);
-}
-
-.reveal-sub{
-  font-size:13px;
-  color:var(--muted);
 }
 
 .btn-close{
