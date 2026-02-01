@@ -1,12 +1,13 @@
 :root{
-  --bg:#fff8f6;
-  --card:#ffffff;
   --rose:#d88c96;
+  --rose-soft:#f3c7cc;
+  --bg1:#fff5f6;
+  --bg2:#fffafc;
   --text:#262525;
   --muted:#6b6b6b;
-  --radius:14px;
-  --shadow:0 10px 30px rgba(0,0,0,0.08);
+  --radius:18px;
   --ease:cubic-bezier(.22,.9,.32,1);
+  --shadow:0 20px 60px rgba(216,140,150,.18);
   --font:"Inter", system-ui, sans-serif;
 }
 
@@ -16,21 +17,27 @@ html,body{height:100%}
 body{
   margin:0;
   font-family:var(--font);
-  background:linear-gradient(180deg,var(--bg),#fff);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
   color:var(--text);
+  overflow:hidden;
 }
 
 .stage{
+  position:relative;
   width:100%;
   height:100%;
-  position:relative;
   display:flex;
   align-items:center;
   justify-content:center;
+}
+
+.bg-gradient{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 10%, #ffe9ec, transparent 40%),
+    radial-gradient(circle at 80% 20%, #ffeef2, transparent 45%),
+    linear-gradient(180deg,var(--bg1),var(--bg2));
+  z-index:0;
 }
 
 .decor{
@@ -38,64 +45,55 @@ body{
   inset:0;
   pointer-events:none;
   overflow:hidden;
+  z-index:1;
 }
 
 .particle{
   position:absolute;
-  width:18px;
-  height:18px;
-  opacity:0.18;
+  font-size:18px;
+  opacity:.18;
   animation:float var(--dur,14s) linear infinite;
-}
-
-.particle.heart{
-  background:
-    radial-gradient(circle at 30% 35%, var(--rose) 45%, transparent 46%),
-    radial-gradient(circle at 70% 35%, var(--rose) 45%, transparent 46%),
-    linear-gradient(var(--rose), var(--rose));
-  background-size:45% 45%,45% 45%,100% 100%;
-  background-position:10% 0,90% 0,0 60%;
-  background-repeat:no-repeat;
-  border-radius:50%;
 }
 
 @keyframes float{
   from{transform:translateY(15vh) rotate(0deg);opacity:0}
-  to{transform:translateY(-30vh) rotate(360deg);opacity:.25}
+  to{transform:translateY(-35vh) rotate(360deg);opacity:.3}
 }
 
+/* CARD */
 .card{
-  background:var(--card);
-  padding:36px 32px;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(12px);
+  padding:38px 34px;
   border-radius:var(--radius);
   box-shadow:var(--shadow);
   text-align:center;
   width:clamp(300px,80vw,420px);
   z-index:2;
-  animation:enter .6s var(--ease) forwards;
+  animation:enter .7s var(--ease);
 }
 
 @keyframes enter{
-  from{opacity:0;transform:translateY(10px)}
+  from{opacity:0;transform:translateY(12px)}
   to{opacity:1;transform:translateY(0)}
 }
 
 .question{
-  font-weight:500;
   margin:0 0 22px;
   font-size:22px;
+  font-weight:500;
 }
 
 .buttons{
   display:flex;
-  gap:18px;
+  gap:20px;
   justify-content:center;
 }
 
 .btn{
   border:none;
-  padding:10px 22px;
-  border-radius:12px;
+  padding:10px 24px;
+  border-radius:14px;
   font-size:15px;
   cursor:pointer;
   transition:transform .3s var(--ease), box-shadow .3s var(--ease);
@@ -103,18 +101,16 @@ body{
 
 .btn-yes{
   background:#fff;
-  border:1px solid rgba(216,140,150,.3);
+  border:1px solid rgba(216,140,150,.35);
   color:var(--rose);
   font-weight:600;
-  z-index:2;
 }
 
 .btn-no{
-  background:var(--rose);
+  background:linear-gradient(180deg,#e09aa3,#d88c96);
   color:#fff;
   font-weight:600;
-  z-index:4;
-  position:relative;
+  box-shadow:0 10px 24px rgba(216,140,150,.35);
 }
 
 .hint{
@@ -124,14 +120,15 @@ body{
   min-height:18px;
 }
 
+/* REVEAL DIALOG */
 .reveal{
   position:fixed;
   inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:rgba(255,255,255,.6);
-  backdrop-filter:blur(6px);
+  background:rgba(255,245,247,.65);
+  backdrop-filter:blur(10px);
   opacity:0;
   pointer-events:none;
   transition:.4s var(--ease);
@@ -144,28 +141,40 @@ body{
 }
 
 .reveal-inner{
-  background:#fff;
-  padding:30px;
-  border-radius:14px;
+  background:
+    radial-gradient(circle at top, #fff0f2, #ffffff);
+  padding:34px 36px;
+  border-radius:22px;
   text-align:center;
-  box-shadow:var(--shadow);
-  animation:pop .4s var(--ease);
+  box-shadow:0 30px 80px rgba(216,140,150,.25);
+  animation:pop .45s var(--ease);
 }
 
 @keyframes pop{
-  from{transform:scale(.96)}
-  to{transform:scale(1)}
+  from{transform:scale(.9);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.reveal-heart{
+  font-size:34px;
+  color:var(--rose);
+  animation:heartbeat 1.6s infinite;
+}
+
+@keyframes heartbeat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.15)}
 }
 
 .reveal h2{
-  margin:0;
-  font-size:26px;
+  margin:12px 0 6px;
+  font-size:28px;
 }
 
 .reveal-lead{
-  margin:10px 0;
-  color:var(--muted);
+  margin:8px 0;
   font-size:16px;
+  color:var(--muted);
 }
 
 .reveal-sub{
@@ -174,7 +183,7 @@ body{
 }
 
 .btn-close{
-  margin-top:16px;
+  margin-top:18px;
   background:#fff;
   border:1px solid #ddd;
 }
